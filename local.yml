@@ -8,5 +8,6 @@
 
   # Roles to execute
   roles:
+    - { role: base, tags: base }
     - { role: development, tags: development }
 

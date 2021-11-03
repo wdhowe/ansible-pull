@@ -1,0 +1,14 @@
+---
+- name: packages|Install apt packages
+  apt:
+    name:
+      - keepassxc
+      - python3-gpg
+      - tree
+      - vim
+    state: present
+
+- name: packages|Install dropbox
+  apt:
+    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+

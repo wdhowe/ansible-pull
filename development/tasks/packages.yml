@@ -3,8 +3,6 @@
   apt:
     name:
       - git
-      - tree
-      - vim
     state: present
 
 - name: packages|Install vscode snap package
