@@ -7,9 +7,10 @@
       - vim
     state: present
 
-- name: packages|Install snap packages
+- name: packages|Install vscode snap package
   community.general.snap:
     name:
       - code
+    classic: yes
     state: present
 
