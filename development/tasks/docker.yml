@@ -1,0 +1,26 @@
+---
+- name: docker|Install docker snap package
+  community.general.snap:
+    name:
+      - docker
+    state: present
+
+- name: docker|Enable service docker and ensure it is not masked
+  systemd:
+    name: snap.docker.dockerd.service
+    enabled: yes
+    state: started
+    masked: no
+
+- name: docker|Create a docker group
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: docker|Adding existing users to group docker
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ userlist }}"
+

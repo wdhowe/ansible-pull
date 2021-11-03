@@ -2,3 +2,6 @@
 - import_tasks: packages.yml
   tags: packages
 
+- import_tasks: docker.yml
+  tags: docker
+
