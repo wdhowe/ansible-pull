@@ -1,0 +1,12 @@
+---
+- name: ansible-pull localhost playbook
+  hosts: localhost
+  connection: local
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  # Roles to execute
+  roles:
+    - { role: development, tags: development }
+
