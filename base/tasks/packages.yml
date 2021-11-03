@@ -2,10 +2,21 @@
 - name: packages|Install apt packages
   apt:
     name:
+      - chrome-gnome-shell
+      - flatpak
+      - gnome-clocks
+      - gnome-shell-extension-prefs
+      - gnome-software
+      - gnome-software-plugin-flatpak
+      - gnome-sushi
+      - gnome-tweaks
+      - gnome-weather
       - keepassxc
       - python3-gpg
       - tree
+      - ubuntu-restricted-extras
       - vim
+      - vlc
     state: present
 
 - name: packages|Install dropbox
