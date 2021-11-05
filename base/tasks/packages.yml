@@ -1,8 +1,15 @@
 ---
+- name: packages|Remove snap packages
+  community.general.snap:
+    name:
+      - firefox # firefox snap does not support gnome extensions
+    state: absent
+
 - name: packages|Install apt packages
   apt:
     name:
       - chrome-gnome-shell
+      - firefox
       - flatpak
       - gnome-clocks
       - gnome-shell-extension-prefs
