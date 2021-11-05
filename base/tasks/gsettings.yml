@@ -26,3 +26,36 @@
 - name: gsettings|Set dock mounts icons
   ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
   when: show_mounts.stdout == "true"
+
+  # Move Show Applications (dot menu on dock) to the top
+- name: gsettings|Get dock show apps at top
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock show-apps-at-top
+  register: apps_top
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "apps_top is: {{ apps_top.stdout }}"
+
+- name: gsettings|Set dock show apps at top
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
+  when: apps_top.stdout == "false"
+
+  # Hide trash icon from the dock
+- name: gsettings|Get show trash icon
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock show-trash
+  register: show_trash
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "show_trash is: {{ show_trash.stdout }}"
+
+- name: gsettings|Set show trash icon
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+  when: show_trash.stdout == "true"
+
+  ##-- Keep this debug message last --##
+- name: gsettings|LOG OUT NOTICE
+  ansible.builtin.debug:
+    msg: "LOG OUT/LOG IN for any gsettings changes to take effect."
