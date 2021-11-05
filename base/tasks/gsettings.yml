@@ -1,0 +1,28 @@
+---
+  # Enable click to minimize dock panel icons
+- name: gsettings|Get gnome shell dash to dock click action
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock click-action
+  register: click_action
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "click_action is: {{ click_action.stdout }}"
+
+- name: gsettings|Set gnome shell dash to dock click to minimize
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+  when: click_action.stdout != "'minimize'"
+
+  # Disable USB/Removable device icons from panel
+- name: gsettings|Get dock mounts icons
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock show-mounts
+  register: show_mounts
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "show_mounts is: {{ show_mounts.stdout }}"
+
+- name: gsettings|Set dock mounts icons
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+  when: show_mounts.stdout == "true"

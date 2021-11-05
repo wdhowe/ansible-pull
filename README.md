@@ -17,3 +17,9 @@ sudo apt install ansible
 ```bash
 sudo ansible-pull --url https://github.com/wdhowe/ansible-pull.git
 ```
+
+- Run the pull playbook, override the 'user' variable used in various roles.
+
+```bash
+sudo ansible-pull --url https://github.com/wdhowe/ansible-pull.git --extra-vars "user=USERNAME"
+```

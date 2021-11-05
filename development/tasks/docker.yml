@@ -17,9 +17,8 @@
     name: docker
     state: present
 
-- name: docker|Adding existing users to group docker
+- name: docker|Adding existing user to group docker
   user:
-    name: "{{ item }}"
+    name: "{{ user }}"
     groups: docker
     append: yes
-  with_items: "{{ userlist }}"

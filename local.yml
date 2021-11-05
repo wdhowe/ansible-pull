@@ -5,6 +5,8 @@
   become: yes
   become_method: sudo
   gather_facts: yes
+  vars:
+    user: bill
 
   # Roles to execute
   roles:
