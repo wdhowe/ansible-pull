@@ -1,5 +1,8 @@
 # ansible-pull
+
 System configuration using ansible-pull.
+
+`Made for Ubuntu 21.10`.
 
 ## Getting Started
 
@@ -14,4 +17,3 @@ sudo apt install ansible
 ```bash
 sudo ansible-pull --url https://github.com/wdhowe/ansible-pull.git
 ```
-

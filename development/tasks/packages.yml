@@ -7,8 +7,6 @@
 
 - name: packages|Install vscode snap package
   community.general.snap:
-    name:
-      - code
+    name: code
     classic: yes
     state: present
-

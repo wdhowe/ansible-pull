@@ -13,13 +13,19 @@
       - gnome-weather
       - keepassxc
       - python3-gpg
+      - steam
       - tree
       - ubuntu-restricted-extras
       - vim
       - vlc
     state: present
 
+- name: packages|Install snap packages
+  community.general.snap:
+    name:
+      - telegram-desktop
+    state: present
+
 - name: packages|Install dropbox
   apt:
     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
-
