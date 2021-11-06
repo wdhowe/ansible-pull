@@ -4,6 +4,7 @@
   ansible.builtin.command: clj -version
   register: clj_installed
   changed_when: false
+  failed_when: false
 
 - name: clojure|clj -version output
   debug:
@@ -37,3 +38,20 @@
   become_user: "{{ user }}"
   ansible.builtin.command: clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "{{ cljnew_version }}"}' :as clj-new
   when: cljnew_version not in clj_tools.stdout
+
+- name: clojure|Check if lein is already installed
+  ansible.builtin.command: which lein
+  register: lein_installed
+  changed_when: false
+  failed_when: false
+
+- name: clojure|which lein output
+  debug:
+    msg: "which lein: {{ lein_installed.stdout }}"
+
+- name: clojure|Download Leiningen into local bin path
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: /usr/local/bin/
+    mode: '0755'
+  when: lein_installed.stdout == ""
