@@ -3,6 +3,8 @@
   apt:
     name:
       - git
+      - openjdk-11-jdk
+      - rlwrap
     state: present
 
 - name: packages|Install vscode snap package

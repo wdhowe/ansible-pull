@@ -1,0 +1,39 @@
+---
+# Clojure development
+- name: clojure|Check if already installed
+  ansible.builtin.command: clj -version
+  register: clj_installed
+  changed_when: false
+
+- name: clojure|clj -version output
+  debug:
+    msg: "clj -version: {{ clj_installed.stderr }}"
+
+- name: clojure|Download clojure installer
+  ansible.builtin.get_url:
+    url: https://download.clojure.org/install/linux-install-{{ clojure_version }}.sh
+    dest: /home/{{ user }}/tmp/
+    mode: '0755'
+  register: clojure_installer
+  when: clojure_version not in clj_installed.stderr
+
+- name: clojure|Execute clojure installer
+  ansible.builtin.command: "{{ clojure_installer.dest }}"
+  when: clojure_version not in clj_installed.stderr
+
+- name: clojure|Check if clj-new is already installed
+  become: yes
+  become_user: "{{ user }}"
+  ansible.builtin.command: clj -Ttools list
+  register: clj_tools
+  changed_when: false
+
+- name: clojure|clj -Ttools list output
+  debug:
+    msg: "clj -Ttools list: {{ clj_tools.stdout }}"
+
+- name: clojure|Install clj-new project creation tool
+  become: yes
+  become_user: "{{ user }}"
+  ansible.builtin.command: clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "{{ cljnew_version }}"}' :as clj-new
+  when: cljnew_version not in clj_tools.stdout

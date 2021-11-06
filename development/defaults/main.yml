@@ -1,0 +1,6 @@
+---
+# https://www.clojure.org/guides/getting_started
+clojure_version: 1.10.3.1020
+
+# https://github.com/seancorfield/clj-new
+cljnew_version: v1.2.362
