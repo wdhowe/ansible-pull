@@ -3,6 +3,8 @@
   apt:
     name:
       - git
+      - httpie
+      - make
       - openjdk-11-jdk
       - rlwrap
     state: present
