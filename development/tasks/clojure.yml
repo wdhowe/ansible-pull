@@ -1,14 +1,22 @@
 ---
 # Clojure development
-- name: clojure|Check if already installed
-  ansible.builtin.command: clj -version
+- name: clojure|Check if clj is already installed
+  ansible.builtin.command: which clj
   register: clj_installed
   changed_when: false
   failed_when: false
 
+- name: clojure|Check clj version
+  ansible.builtin.command: clj -version
+  register: clj_version
+  changed_when: false
+  failed_when: false
+  when: clj_installed.stdout != ""
+
 - name: clojure|clj -version output
-  debug:
-    msg: "clj -version: {{ clj_installed.stderr }}"
+  ansible.builtin.debug:
+    msg: "clj -version: {{ clj_version.stderr }}"
+  when: clj_version.stderr is defined
 
 - name: clojure|Download clojure installer
   ansible.builtin.get_url:
@@ -16,11 +24,11 @@
     dest: /home/{{ user }}/tmp/
     mode: '0755'
   register: clojure_installer
-  when: clojure_version not in clj_installed.stderr
+  when: (clj_installed.stdout == "") or (clojure_version not in clj_version.stderr)
 
 - name: clojure|Execute clojure installer
   ansible.builtin.command: "{{ clojure_installer.dest }}"
-  when: clojure_version not in clj_installed.stderr
+  when: (clj_installed.stdout == "") or (clojure_version not in clj_version.stderr)
 
 - name: clojure|Check if clj-new is already installed
   become: yes
@@ -30,7 +38,7 @@
   changed_when: false
 
 - name: clojure|clj -Ttools list output
-  debug:
+  ansible.builtin.debug:
     msg: "clj -Ttools list: {{ clj_tools.stdout }}"
 
 - name: clojure|Install clj-new project creation tool
@@ -46,7 +54,7 @@
   failed_when: false
 
 - name: clojure|which lein output
-  debug:
+  ansible.builtin.debug:
     msg: "which lein: {{ lein_installed.stdout }}"
 
 - name: clojure|Download Leiningen into local bin path
