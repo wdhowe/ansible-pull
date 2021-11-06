@@ -1,6 +1,6 @@
 ---
 - name: packages|Install apt packages
-  apt:
+  ansible.builtin.apt:
     name:
       - git
       - httpie

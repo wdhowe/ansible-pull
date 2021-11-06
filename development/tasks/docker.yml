@@ -6,7 +6,7 @@
     state: present
 
 - name: docker|Enable service docker and ensure it is not masked
-  systemd:
+  ansible.builtin.systemd:
     name: snap.docker.dockerd.service
     enabled: yes
     state: started
@@ -18,7 +18,7 @@
     state: present
 
 - name: docker|Adding existing user to group docker
-  user:
+  ansible.builtin.user:
     name: "{{ user }}"
     groups: docker
     append: yes

@@ -1,8 +1,8 @@
 ---
-- import_tasks: packages.yml
+- ansible.builtin.import_tasks: packages.yml
   tags: packages
 
-- import_tasks: gsettings.yml
+- ansible.builtin.import_tasks: gsettings.yml
   become: yes
   become_user: "{{ user }}"
   tags: gsettings

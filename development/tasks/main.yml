@@ -1,9 +1,9 @@
 ---
-- import_tasks: packages.yml
+- ansible.builtin.import_tasks: packages.yml
   tags: packages
 
-- import_tasks: docker.yml
+- ansible.builtin.import_tasks: docker.yml
   tags: docker
 
-- import_tasks: clojure.yml
+- ansible.builtin.import_tasks: clojure.yml
   tags: clojure

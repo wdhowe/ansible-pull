@@ -6,7 +6,7 @@
     state: absent
 
 - name: packages|Install apt packages
-  apt:
+  ansible.builtin.apt:
     name:
       - chrome-gnome-shell
       - firefox
@@ -34,5 +34,5 @@
     state: present
 
 - name: packages|Install dropbox
-  apt:
+  ansible.builtin.apt:
     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
