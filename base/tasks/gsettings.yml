@@ -25,7 +25,7 @@
 
 - name: gsettings|Set dock mounts icons
   ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
-  when: show_mounts.stdout == "true"
+  when: show_mounts.stdout != "false"
 
   # Move Show Applications (dot menu on dock) to the top
 - name: gsettings|Get dock show apps at top
@@ -39,7 +39,7 @@
 
 - name: gsettings|Set dock show apps at top
   ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
-  when: apps_top.stdout == "false"
+  when: apps_top.stdout != "true"
 
   # Hide trash icon from the dock
 - name: gsettings|Get show trash icon
@@ -53,7 +53,35 @@
 
 - name: gsettings|Set show trash icon
   ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
-  when: show_trash.stdout == "true"
+  when: show_trash.stdout != "false"
+
+# Shorten dock panel to make it as compact as the amount of icons it has
+- name: gsettings|Get extend-height setting
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock extend-height
+  register: extend_height
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "extend_height is: {{ extend_height.stdout }}"
+
+- name: gsettings|Set extend-height
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+  when: extend_height.stdout != "false"
+
+# Move the dock panel to the bottom
+- name: gsettings|Get dock-position
+  ansible.builtin.shell: gsettings get org.gnome.shell.extensions.dash-to-dock dock-position
+  register: dock_position
+  changed_when: false
+
+- name: gsettings|Display current setting
+  ansible.builtin.debug:
+    msg: "dock_position is: {{ dock_position.stdout }}"
+
+- name: gsettings|Set dock-position
+  ansible.builtin.shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
+  when: dock_position.stdout != "'BOTTOM'"
 
   ##-- Keep this debug message last --##
 - name: gsettings|LOG OUT NOTICE
