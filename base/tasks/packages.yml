@@ -5,6 +5,16 @@
       - firefox # firefox snap does not support gnome extensions
     state: absent
 
+- name: packages|Keepassxc PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:phoerious/keepassxc
+    state: present
+
+- name: packages|Mozilla Team PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:mozillateam/ppa
+    state: present
+
 - name: packages|Install apt packages
   ansible.builtin.apt:
     name:

@@ -8,6 +8,10 @@
   vars:
     user: bill
 
+  pre_tasks:
+    - ansible.builtin.debug:
+        msg: "Intended for Ubuntu 22.04."
+
   # Roles to execute
   roles:
     - { role: base, tags: base }
