@@ -1,11 +1,18 @@
 ---
+- name: packages|Remove apt packages
+  ansible.builtin.apt:
+    name:
+      - "thunderbird*"
+    state: absent
+    purge: yes
+
 - name: packages|Remove snap packages
   community.general.snap:
     name:
       - firefox # firefox snap does not support gnome extensions
     state: absent
 
-- name: packages|Mozilla Team PPA
+- name: packages|Add Mozilla Team PPA
   ansible.builtin.apt_repository:
     repo: ppa:mozillateam/ppa
     state: present
