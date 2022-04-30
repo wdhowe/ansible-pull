@@ -2,7 +2,7 @@
 
 System configuration using ansible-pull.
 
-`Made for Ubuntu 21.10`.
+`Made for Ubuntu 22.04`.
 
 ## Getting Started
 
