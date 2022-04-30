@@ -5,11 +5,6 @@
       - firefox # firefox snap does not support gnome extensions
     state: absent
 
-- name: packages|Keepassxc PPA
-  ansible.builtin.apt_repository:
-    repo: ppa:phoerious/keepassxc
-    state: present
-
 - name: packages|Mozilla Team PPA
   ansible.builtin.apt_repository:
     repo: ppa:mozillateam/ppa
@@ -28,7 +23,6 @@
       - gnome-sushi
       - gnome-tweaks
       - gnome-weather
-      - keepassxc
       - python3-gpg
       - rclone
       - steam
@@ -41,6 +35,8 @@
 - name: packages|Install snap packages
   community.general.snap:
     name:
+      - bitwarden
+      - discord
       - telegram-desktop
     state: present
 
