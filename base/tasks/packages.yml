@@ -6,22 +6,10 @@
     state: absent
     purge: yes
 
-- name: packages|Remove snap packages
-  community.general.snap:
-    name:
-      - firefox # firefox snap does not support gnome extensions
-    state: absent
-
-- name: packages|Add Mozilla Team PPA
-  ansible.builtin.apt_repository:
-    repo: ppa:mozillateam/ppa
-    state: present
-
 - name: packages|Install apt packages
   ansible.builtin.apt:
     name:
       - chrome-gnome-shell
-      - firefox
       - flatpak
       - gnome-clocks
       - gnome-shell-extension-prefs
@@ -42,11 +30,6 @@
 - name: packages|Install snap packages
   community.general.snap:
     name:
-      - bitwarden
-      - discord
+      - firefox
       - telegram-desktop
     state: present
-
-- name: packages|Install dropbox
-  ansible.builtin.apt:
-    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb

@@ -2,19 +2,13 @@
 - name: packages|Install apt packages
   ansible.builtin.apt:
     name:
+      - awscli
       - git
       - httpie
       - make
       - openjdk-11-jdk
       - python3-pip
       - rlwrap
-    state: present
-
-- name: packages|Install python3 packages
-  ansible.builtin.pip:
-    name:
-      - awscli
-    executable: pip3
     state: present
 
 - name: packages|Install vscode snap package
