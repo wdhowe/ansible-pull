@@ -8,6 +8,7 @@
       - make
       - openjdk-11-jdk
       - python3-pip
+      - python3-venv
       - rlwrap
     state: present
 
