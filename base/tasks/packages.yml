@@ -31,5 +31,4 @@
   community.general.snap:
     name:
       - firefox
-      - telegram-desktop
     state: present
